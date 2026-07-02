@@ -139,7 +139,7 @@ const AddFood = () => {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="price" className="text-sm font-semibold text-gray-700">Price ($)</label>
+            <label htmlFor="price" className="text-sm font-semibold text-gray-700">Price (NRP)</label>
             <input
               type="number"
               step="0.01"
