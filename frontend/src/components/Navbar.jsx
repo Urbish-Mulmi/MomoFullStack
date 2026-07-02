@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import { getUser, logoutUser } from "../api/auth.service";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSuccess, LogoutSuccess } from "../redux/features/authSlice";
+import { clearCart } from "../redux/features/cartSlice";
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     await logoutUser();
     dispatch(LogoutSuccess());
+    dispatch(clearCart());
   };
 
   
