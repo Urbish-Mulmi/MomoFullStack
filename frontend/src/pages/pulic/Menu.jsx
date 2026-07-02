@@ -1,47 +1,3 @@
-// // import { useQuery } from '@tanstack/react-query'
-// import { useQuery } from '@tanstack/react-query'
-// import React from 'react'
-// import { getFoods } from '../api/food.service.js'
-// const Menu = () => {
-
-//   // tanstack has useQuery, useMutation
-//   //  to fetch/get datas using tanstack
-//   // useQuery vitra object dina parxa(
-//   // {querykokeyname dina,function call garna name dina}
-//   //)
-//   const {data, isPending, isError, error} = useQuery({
-//     queryKey:["foods"],
-//     queryFn:getFoods, //map the getFoods function to fetch food gng
-//   })
-
-//   if(isPending){
-//     return <div>Msg from tanstack, menu,jsx Loading....</div>
-//   }
-//   if(isError){
-//     return <div>Msg from tanstack, menu,jsx Error....</div>
-//   }
-//   console.log(data)
-
-
-//    return (
-//   <div>
-//     {data?.foods?.map((food) => (
-//       <div key={food._id}>
-//         <img src={food.photo} alt={food.name} />
-//         <h2>{food.name}</h2>
-//         <h2>{food.description}</h2>
-//         <h2>{food.price}</h2>
-//       </div>
-//     ))}
-//   </div>
-// )
-    
-  
-// }
-
-// export default Menu
-
-// styling done by ai:
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { getFoods } from '../../api/food.service'
@@ -107,12 +63,12 @@ const Menu = () => {
             className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col"
           >
             {/* Food Image Container */}
-            <div className="relative h-48 w-full bg-gray-200 overflow-hidden">
+            <div className="relative h-56 w-full bg-gray-200 overflow-hidden">
               <img
               onClick={()=>{navigate(`/menu/${food._id}`, {state:food})}} 
                 src={food.photo} 
                 alt={food.name} 
-                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover object-center sm:hover:scale-105 transition-transform duration-500"
               />
                     
             </div>
