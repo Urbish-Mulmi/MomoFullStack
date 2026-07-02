@@ -1,0 +1,24 @@
+redux used in production level to create global state.
+traditionally we used context api but use of redux is more common.
+
+make pages: auth,
+    public:
+
+import react-router to make routes and remove strict mode from   main.jsx file and replace with <browserrouter> </browserrouter>
+
+make changes in app.jsx and import approutes
+define routes and component to render(pages to render)
+
+now in signup.jsx:
+write code for simple signup here done using gemini.
+
+then in src/api/apiInstance.js:
+  make/mount a base url route
+  configure to attach token/cookie in each request via credentials:true
+make auth.service.js:  
+ make services
+
+ hooks (function) banauna  
+ ///
+
+ cloudinary used to upload file to then store file in database

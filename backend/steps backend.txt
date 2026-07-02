@@ -1,0 +1,169 @@
+DAY1
+steps carried out in backend setups:
+  npm init -y
+  npm i express mongoose
+  npm i -d nodemon
+  in package.json :
+  "type": "module"
+
+server banauna in app.js
+but server run chai index.js bata garna
+------------------------------------------------
+create db folder and inside it make index,js and write conneciton to mongo db compass using async await
+------------------------------------------------
+connect to db using promise based connection and use condition of if connected only then run server using .then.catch
+------------------------------------------------
+data modleing:
+backend vitra src folder banauna and inside src make respective models and map it to the schema defined for system.
+------------------------------------------------
+
+making routes(http methods api):
+
+routes vanna folder is made inside src
+
+src vitrra make  folder named routes and make routes there,
+routes ko handler function are made-defined in separate folder named controller
+--------------------------------------------------------
+
+controllers named folder is made inside src 
+
+inside it is handle function that enables functionality of routes
+
+via use of .post httpmethod as:
+userRoutes.route('/sign-up').post(registerUser);
+//---------------------------------------------
+
+DAY2 
+ Request Hanlder  Functions defined for:
+
+  signup funtion completing with JWT token and cookie parser
+  login
+  loggedin view curent user info
+
+ A boiler plate of hander function:
+---------------------------------------------------
+ export const function-name  (req,res)=>{
+
+  try {
+  
+    }
+ catch (error) {
+    return res.status(500).json({
+      message: "internal server error",
+      success: false,
+      error: error.message,
+    });
+  }
+ }
+ ---------------------------------------------------
+
+1.email redudnant checking and stoping redudnant signup
+userModel.findOne({email})
+
+2. password hashing: npm i bcrypt js
+
+.env file creation and make a JWT_SECRET_KEY using website:
+https://jwtsecrets.com/
+
+
+3. token and cookie
+tokens are integral part in responding to respective 
+client  
+
+npm i jsonwebtoken
+
+cookies
+in index.js foremost run jwt even before anything
+
+4. token verification to allow access of resources 
+
+VerifyToken can be  used only after authentication, not before it.
+Once login (or signup with auto-login) succeeds, a token is issued to the user, and only then verifyToken can validate that token in later request
+Token validation is usually done in routes (or right before controllers), using middleware like verifyToken
+
+ router.get('/profile', verifyToken, getProfile);
+auth.middleware is created
+auth.middleware is what?does what? in chronology of:
+
+where it comes toplay?
+userRoutes.route('/').get(homePage);
+userRoutes.route('/sign-up').post(registerUser);
+userRoutes.route('/login').post(loginUser);
+userRoutes.route('/logout').post(logoutUser);
+userRoutes.route('/get-me').get(verifyToken, getMe);
+is it resposible of tokens and cookies possiblility in system?
+
+
+cookie-parser in app:
+import cookieParser from "cookie-parser";
+cookie parser middleware used
+app.use(cookieParser())
+-------------------
+auth.model.js for verification of user using tokens:-
+JWT Verification Flow
+
+1. Secret Key Setup
+- JWT_SECRET_KEY is stored in .env.
+- Used during both token creation (jwt.sign) and token verification (jwt.verify).
+
+2. Token Creation (Login)
+const token = jwt.sign(
+  { id: user._id },
+  process.env.JWT_SECRET_KEY,
+  { expiresIn: "1h" }
+);
+
+- Payload contains id: user._id.
+- This payload is embedded inside the JWT.
+
+3. Token Arrival
+- Server sends token to browser (usually in a cookie).
+- Browser automatically sends the token with future requests.
+
+4. Token Extraction
+const token = req.cookies?.token;
+
+- Reads the JWT sent by the browser.
+
+5. Token Verification
+const encoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+- Verifies token signature using the secret key.
+- Checks token has not been tampered with.
+- Checks token has not expired.
+- Returns decoded payload.
+
+Example encoded:
+{
+  id: "userId123",
+  iat: ...,
+  exp: ...
+}
+
+6. User Lookup
+const user = await userModel.findById(encoded.id);
+
+- encoded.id comes from the payload defined during jwt.sign().
+- Finds the corresponding user in the database.
+- If user does not exist, return error.
+
+7. Attach User
+req.user = user;
+
+- Makes authenticated user data available to subsequent middleware/routes.
+
+8. Continue Request
+next();
+
+- Passes control to the next middleware or route handler.
+
+Key Idea:
+- Token stores user information defined during jwt.sign().
+- jwt.verify() validates the token and returns that stored information.
+- encoded.id is the same id that was originally placed in the payload during token creation.
+--------------------------------------
+
+--------------------------------------
+
+see multer docs
+multer used to parse form data 
